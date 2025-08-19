@@ -1,0 +1,94 @@
+/* --- إعدادات أساسية --- */
+body {
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo الجميل */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* لون خلفية الصفحة */
+    color: #333; /* لون النص الأساسي */
+}
+
+.container {
+    max-width: 800px; /* تحديد عرض أقصى للمحتوى */
+    margin: 0 auto; /* توسيط المحتوى في الصفحة */
+    padding: 20px;
+}
+
+/* --- رأس الصفحة --- */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    border-bottom: 4px solid #5c67f2;
+}
+
+header h1 {
+    text-align: center;
+    margin: 0;
+}
+
+header nav ul {
+    padding: 0;
+    list-style: none; /* إزالة نقاط القائمة */
+    text-align: center;
+}
+
+header nav ul li {
+    display: inline; /* جعل عناصر القائمة أفقية */
+    margin: 0 15px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none; /* إزالة الخط تحت الروابط */
+    font-weight: bold;
+}
+
+/* --- تنسيق المقالات --- */
+.post {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* حواف دائرية */
+    padding: 20px;
+    margin-bottom: 25px; /* مسافة بين المقالات */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* إضافة ظل خفيف */
+}
+
+.post h2 {
+    color: #333;
+}
+
+.post .post-meta {
+    color: #777;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+.post img {
+    max-width: 100%; /* جعل الصورة متجاوبة مع عرض المقالة */
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.read-more {
+    display: inline-block;
+    background-color: #5c67f2; /* لون الزر */
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s; /* تأثير بسيط عند تمرير الماوس */
+}
+
+.read-more:hover {
+    background-color: #4a54c9; /* تغيير لون الزر عند تمرير الماوس */
+}
+
+/* --- تذييل الصفحة --- */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+}
