@@ -71,17 +71,18 @@ header nav a {
 
 .read-more {
     display: inline-block;
-    background-color: #5c67f2; /* لون الزر */
+    background-color: #5c67f2;
     color: #fff;
     padding: 10px 15px;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.3s; /* تأثير بسيط عند تمرير الماوس */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* السطر المضاف */
 }
 
 .read-more:hover {
-    background-color: #4a54c9; /* تغيير لون الزر عند تمرير الماوس */
+    background-color: #4a54c9;
+    transform: translateY(-3px); /* إضافة تأثير بسيط للزر عند التمرير */
 }
 
 /* --- تذييل الصفحة --- */
@@ -91,4 +92,61 @@ footer {
     text-align: center;
     padding: 20px 0;
     margin-top: 30px;
+}
+.hero {
+    background-image: url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2070'); /* يمكنك تغيير الصورة */
+    background-size: cover;
+    background-position: center;
+    padding: 100px 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.hero h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+/* ---- قسم التجاوب مع الشاشات الصغيرة ---- */
+@media (max-width: 768px) {
+    header nav ul li {
+        display: block; /* جعل الروابط عمودية */
+        margin: 10px 0;
+    }
+
+    .hero h2 {
+        font-size: 2em;
+    }
+}
+/* ---- تنسيقات صفحة المقالة الكاملة ---- */
+.full-article {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.full-article h1 {
+    font-size: 2.8em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.article-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.article-content p {
+    line-height: 1.8; /* زيادة المسافة بين السطور لسهولة القراءة */
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.article-content h3 {
+    font-size: 1.6em;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    color: #5c67f2;
 }
