@@ -1,64 +1,470 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html dir="rtl" lang="ar">
 <head>
-    <section class="hero">
-    <div class="container">
-        <h2>أهلاً بك في مدونتي</h2>
-        <p>هنا أشارك أفكاري وتجاربي في عالم البرمجة والتصميم.</p>
-    </div>
-</section>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدونتي الشخصية</title>
-    <link rel="stylesheet" href="style.css">
+    <title>اسم مدونتك | الصفحة الرئيسية</title>
+    <meta name="description" content="وصف قصير لمدونتك هنا">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- إعدادات أساسية --- */
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: right;
+            transition: margin-left 0.3s ease-in-out;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        h1, h2, h3 {
+            font-weight: 900;
+        }
+        p {
+            line-height: 1.7;
+        }
+        a {
+            text-decoration: none;
+            color: #c15036;
+        }
+        section {
+            padding: 60px 0;
+        }
+        
+        /* --- الهيدر (الجزء العلوي) --- */
+        header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #333;
+        }
+        .desktop-nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .desktop-nav li {
+            margin-right: 25px;
+        }
+        .desktop-nav li a {
+            color: #555;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        .desktop-nav li a:hover {
+            color: #c15036;
+        }
+
+        /* --- زر الهامبرجر (يظهر في الجوال فقط) --- */
+        .hamburger-btn {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        .hamburger-btn .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: #333;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        /* --- القائمة الجانبية (للموبايل) --- */
+        .mobile-nav {
+            height: 100%;
+            width: 280px;
+            position: fixed;
+            z-index: 1001;
+            top: 0;
+            left: -280px; /* مخفية خارج الشاشة جهة اليسار */
+            background-color: #111;
+            overflow-x: hidden;
+            transition: left 0.3s ease-in-out;
+            padding-top: 60px;
+        }
+        .mobile-nav.active {
+            left: 0; /* تظهر عند إضافة كلاس active */
+        }
+        .mobile-nav a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 22px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+        .mobile-nav a:hover {
+            color: #f1f1f1;
+        }
+        .mobile-nav .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 36px;
+            color: #fff;
+        }
+
+        /* --- طبقة التعتيم (Overlay) --- */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.655);
+            z-index: 999;
+        }
+        .overlay.active {
+            display: block;
+        }
+
+
+        /* --- القسم الرئيسي (Hero Section) --- */
+        .hero {
+            position: relative;
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+            padding: 100px 20px;
+            overflow: hidden; 
+        }
+        .hero::before {
+             content: '';
+             position: absolute;
+             top: 0;
+             left: 0;
+             right: 0;
+             bottom: 0;
+             background-color: rgba(0, 0, 0, 0.7);
+             z-index: 2;
+        }
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: 1;
+        }
+        .hero-background.active {
+            opacity: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+        .cta-button {
+            background-color: #c15036;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #a0412b;
+        }
+
+        /* --- قسم الميزات --- */
+        .features {
+            background-color: #fff;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+        }
+        .feature-item img {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 20px;
+        }
+
+        /* --- قسم آخر المقالات --- */
+        .blog-section {
+            background-color: #f9f9f9;
+        }
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .post-card {
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .post-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .post-content {
+            padding: 20px;
+        }
+        .post-date {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .post-card h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .post-card h3 a {
+            color: #333;
+        }
+
+        /* --- قسم التذييل (Footer) --- */
+        footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer-nav a {
+            color: #aaa;
+            margin: 0 10px;
+        }
+        .footer-nav a:hover {
+            color: #fff;
+        }
+        .copyright {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        /* --- التجاوب مع الشاشات الصغيرة (Mobile Responsive) --- */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none; /* إخفاء القائمة العادية */
+            }
+            .hamburger-btn {
+                display: block; /* إظهار زر الهامبرجر */
+            }
+            .features-grid, .posts-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-container {
+                flex-direction: row;
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div id="overlay" class="overlay"></div>
 
+    <nav id="mobile-nav" class="mobile-nav">
+        <a href="javascript:void(0)" id="close-btn" class="close-btn">&times;</a>
+        <a href="#">الرئيسية</a>
+        <a href="#">المدونة</a>
+        <a href="#">ابدأ هنا</a>
+        <a href="#">اتصل بنا</a>
+    </nav>
+    
     <header>
-        <div class="container">
-            <h1>رحلة تعلمي تحسين محركات البحث واعلانات قوقل </h1>
-            <nav>
-                <ul>
-                    <li><a href="#">الرئيسية</a></li>
-                    <li><a href="#">من أنا؟</a></li>
-                    <li><a href="#">تواصل معي</a></li>
-                </ul>
-            </nav>
+        <div class="container header-container">
+            <a href="#" class="logo">مدونتي</a>
+            <ul class="desktop-nav">
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">المدونة</a></li>
+                <li><a href="#">ابدأ هنا</a></li>
+                <li><a href="#">اتصل بنا</a></li>
+            </ul>
+            <button id="hamburger-btn" class="hamburger-btn">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </header>
 
     <main>
-        <div class="container">
-            <article class="post">
-                <h2>عنوان المقالة الأولى: رحلتي مع انشاء اول مدونة </h2>
-                <p class="post-meta">نُشر بتاريخ 19 أغسطس 2025 | بواسطة: اسمك</p>
-                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjAxOTZ8MHwxfHNlYXJjaHw0fHxjb2Rpbmd8ZW58MHx8fHwxNzIyMDU0MjQy&ixlib=rb-4.0.3&q=80&w=1080" alt="صورة للمقالة الأولى">
-                <p>
-                    هذا هو النص التمهيدي للمقالة الأولى. هنا يمكنك كتابة ملخص قصير ومشوّق عن محتوى المقالة لجذب القارئ. البرمجة عالم واسع مليء بالتحديات والفرص المذهلة...
-                </p>
-                <a href="#" class="read-more">اقرأ المزيد</a>
-            </article>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>رحلتي في تعلم أساسيات تحسين محركات البحث SEO </h1>
+                <p>هذه رحلتي في تعلم SEO، وربما تخطئ أو تصيب. وجود ملاحظاتك أو إضافاتك على ما أكتب يساعدني على التعلم أكثر ويثري محتوى المدونة</p>
+                <a href="#" class="cta-button">المقالات</a>
+            </div>
+        </section>
 
-            <article class="post">
-                <h2>عنوان المقالة الثانية: نصائح للحفاظ على الإنتاجية</h2>
-                <p class="post-meta">نُشر بتاريخ 15 أغسطس 2025 | بواسطة: اسمك</p>
-                <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjAxOTZ8MHwxfHNlYXJjaHwxfHxsYXB0b3AlMjB3b3JrfGVufDB8fHx8MTcyMjA1NDI0Mg&ixlib=rb-4.0.3&q=80&w=1080" alt="صورة للمقالة الثانية">
-                <p>
-                    في عالم اليوم سريع الخطى، قد يكون الحفاظ على التركيز والإنتاجية أمرًا صعبًا. في هذه المقالة، أشارككم بعض الاستراتيجيات والأدوات التي ساعدتني على تنظيم وقتي وإنجاز مهامي بكفاءة...
-                </p>
-                <a href="#" class="read-more">اقرأ المزيد</a>
-            </article>
-        </div>
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">لماذا تتابع مدونتي؟</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <img src="https://webwiner.com/wp-content/uploads/2021/04/teamwork.png" alt="أيقونة خبرة">
+                        <h3>إذا كن خبير</h3>
+                        <p>لديك فرصة لتشارك رأيك وتصحيح المعلومات وإثراء النقاش.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="https://webwiner.com/wp-content/uploads/2021/04/appointment.png" alt="أيقونة مقالات">
+                        <h3>إذا كنت مبتدئاً </h3>
+                        <p>ستجد مايختصر عليك الوقت لأنك سترى الأخطاء قبلك.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="https://webwiner.com/wp-content/uploads/2021/04/clients.png" alt="أيقونة دعم فني">
+                        <h3>إذا كنت مجرد مهتم </h3>
+                        <p>ستتابع تجربة انسانية ممتعة في التعلم.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="blog-section">
+            <div class="container">
+                <h2 class="section-title">آخر المقالات في المدونة </h2>
+                <div class="posts-grid">
+                    <div class="post-card">
+                        <a href="my-first-article.html"><img src="image/4.jpg" alt="Seo Audit"></a>
+                        <div class="post-content">
+                            <p class="post-date">20 أغسطس, 2025</p>
+                            <h3><a href="#">بداية رحلتي في تعلم تحسين محركات البحث SEO</a></h3>
+                        </div>
+                    </div>
+                    <div class="post-card">
+                        <a href="#"><img src="https://via.placeholder.com/400x250.png?text=صورة+المقال" alt="صورة المقال الثاني"></a>
+                        <div class="post-content">
+                            <p class="post-date">19 أغسطس, 2025</p>
+                            <h3><a href="#">هنا تضع عنوان مقالك الثاني</a></h3>
+                        </div>
+                    </div>
+                    <div class="post-card">
+                       <a href="#"><img src="https://via.placeholder.com/400x250.png?text=صورة+المقال" alt="صورة المقال الثالث"></a>
+                        <div class="post-content">
+                            <p class="post-date">18 أغسطس, 2025</p>
+                            <h3><a href="#">وهنا تضع عنوان مقالك الثالث</a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-
+    
     <footer>
         <div class="container">
-            <p>&copy; 2025 جميع الحقوق محفوظة - مدونتي الشخصية</p>
+            <div class="footer-nav">
+                <a href="#">سياسة الخصوصية</a>
+                <a href="#">شروط الاستخدام</a>
+                <a href="#">اتصل بنا</a>
+            </div>
+            <p class="copyright">جميع الحقوق محفوظة &copy; اسم مدونتك 2025</p>
         </div>
     </footer>
+
+    <script>
+        // --- سكريبت الخلفية المتحركة ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroSection = document.querySelector('.hero');
+            if (heroSection) {
+                const images = ['image/1.jpg', 'image/2.jpg', 'image/3.jpg'];
+                let currentIndex = 0;
+
+                // إنشاء عناصر الخلفية
+                images.forEach((img, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'hero-background';
+                    if (index === 0) {
+                        slide.classList.add('active');
+                    }
+                    slide.style.backgroundImage = `url('${img}')`;
+                    heroSection.prepend(slide);
+                });
+
+                setInterval(() => {
+                    const slides = document.querySelectorAll('.hero-background');
+                    const currentSlide = slides[slides.length - 1 - currentIndex];
+                    
+                    currentIndex = (currentIndex + 1) % images.length;
+                    const nextSlide = slides[slides.length - 1 - currentIndex];
+
+                    if (currentSlide) currentSlide.classList.remove('active');
+                    if (nextSlide) nextSlide.classList.add('active');
+
+                }, 5000); // تغيير الصورة كل 5 ثوانٍ
+            }
+
+            // --- سكريبت قائمة الهامبرجر ---
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileNav = document.getElementById('mobile-nav');
+            const closeBtn = document.getElementById('close-btn');
+            const overlay = document.getElementById('overlay');
+
+            function openNav() {
+                if (mobileNav) mobileNav.classList.add('active');
+                if (overlay) overlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // منع التمرير في الصفحة
+            }
+
+            function closeNav() {
+                if (mobileNav) mobileNav.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                document.body.style.overflow = ''; // السماح بالتمرير مجدداً
+            }
+
+            if (hamburgerBtn) hamburgerBtn.addEventListener('click', openNav);
+            if (closeBtn) closeBtn.addEventListener('click', closeNav);
+            if (overlay) overlay.addEventListener('click', closeNav);
+        });
+    </script>
 
 </body>
 </html>
