@@ -137,6 +137,41 @@
                     <p>أحب أن أنوه أن الغرض الأساسي من المدونة هو غرض تعليمي. لذلك، إذا كنت خبيرًا في المجال ولاحظت أي خطأ في المفاهيم أو المعلومات، فالرجاء تنبيهي لذلك وتصحيح المعلومة لي. وإذا كنت أنت أيضًا في بداية رحلة تعلم SEO، فشاركني تجربتك في التعليقات.</p>
                     <p>وشكرًا جزيلًا لكل شخص تابع المقال حتى النهاية، وانتظروني في المقال القادم بإذن الله.</p>
                 </section>
+                <!-- أزرار المشاركة عبر وسائل التواصل الاجتماعي -->
+                <div style="margin-top:40px; text-align:center;">
+                    <span style="font-weight:700; font-size:18px; color:#555;">شارك المقال:</span>
+                    <div style="margin-top:15px; display:flex; justify-content:center; gap:18px;">
+                        <!-- زر لينكدإن -->
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://seo-blog-a03d1.web.app/my-first-article.html&title=أنصحك%20بقراءة%20هذا%20المقال%20عن%20رحلتي%20في%20تعلم%20تحسين%20محركات%20البحث%20(SEO)" target="_blank" title="مشاركة على لينكدإن" style="font-size:24px;">
+                            <img src="image/linkedin.svg" alt="LinkedIn" style="width:32px;vertical-align:middle;">
+                        </a>
+                        <!-- زر إكس (تويتر سابقاً) -->
+                        <a href="https://x.com/intent/tweet?url=https://seo-blog-a03d1.web.app/my-first-article.html&text=أنصحك%20بقراءة%20هذا%20المقال%20عن%20رحلتي%20في%20تعلم%20تحسين%20محركات%20البحث%20(SEO)" target="_blank" title="مشاركة على إكس" style="font-size:24px;">
+                            <img src="image/x.svg" alt="X" style="width:32px;vertical-align:middle;">
+                        </a>
+                        <!-- زر واتساب -->
+                        <a href="https://wa.me/?text=أنصحك%20بقراءة%20هذا%20المقال%20عن%20رحلتي%20في%20تعلم%20تحسين%20محركات%20البحث%20(SEO)%20https://seo-blog-a03d1.web.app/my-first-article.html" target="_blank" title="مشاركة على واتساب" style="font-size:24px;">
+                            <img src="image/whatsapp.svg" alt="WhatsApp" style="width:32px;vertical-align:middle;">
+                        </a>
+                        <!-- زر فيسبوك -->
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://seo-blog-a03d1.web.app/my-first-article.html&quote=أنصحك%20بقراءة%20هذا%20المقال%20عن%20رحلتي%20في%20تعلم%20تحسين%20محركات%20البحث%20(SEO)" target="_blank" title="مشاركة على فيسبوك" style="font-size:24px;">
+                            <img src="image/facebook-logo.svg" alt="Facebook" style="width:32px;vertical-align:middle;">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- نموذج التعليقات -->
+                <div id="comments-section" style="margin-top:50px;">
+                    <h3 style="color:#c15036;">أضف تعليقك</h3>
+                    <form id="comment-form" style="margin-bottom:30px;">
+                        <input type="text" id="comment-name" placeholder="اسمك" required style="width:100%;padding:10px;margin-bottom:10px;border-radius:5px;border:1px solid #ccc;">
+                        <textarea id="comment-text" placeholder="اكتب تعليقك هنا..." required style="width:100%;padding:10px;height:80px;border-radius:5px;border:1px solid #ccc;"></textarea>
+                        <button type="submit" style="margin-top:10px;background:#c15036;color:#fff;padding:10px 25px;border:none;border-radius:5px;font-weight:700;cursor:pointer;">إرسال التعليق</button>
+                    </form>
+                    <div id="comments-list">
+                        <!-- التعليقات ستظهر هنا -->
+                    </div>
+                </div>
             </article>
         </div>
     </main>
@@ -152,5 +187,62 @@
         </div>
     </footer>
 
+    <!-- أضف مكتبة فايربيز قبل سكريبت التعليقات -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    <script>
+        // إعدادات مشروعك من Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAz-F2eBjYvZ6-srMVQbJuh5cb2G7nFNxs",
+            authDomain: "seo-blog-a03d1.firebaseapp.com",
+            databaseURL: "https://seo-blog-a03d1-default-rtdb.firebaseio.com",
+            projectId: "seo-blog-a03d1",
+            storageBucket: "seo-blog-a03d1.firebasestorage.app",
+            messagingSenderId: "1020684090026",
+            appId: "1:1020684090026:web:2fa0d5f54c1768a0576ed3",
+            measurementId: "G-Y5Q8WHT348"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        const commentsRef = db.ref("comments/myFirstArticle");
+
+        // عرض التعليقات من فايربيز
+        function renderComments(comments) {
+            const list = document.getElementById('comments-list');
+            list.innerHTML = '';
+            if (!comments || Object.keys(comments).length === 0) {
+                list.innerHTML = '<p style="color:#777;">لا توجد تعليقات بعد.</p>';
+                return;
+            }
+            // ترتيب من الأحدث للأقدم
+            const sorted = Object.values(comments).sort((a, b) => b.timestamp - a.timestamp);
+            sorted.forEach(comment => {
+                const div = document.createElement('div');
+                div.style = "background:#f9f9f9;border-radius:7px;padding:12px;margin-bottom:10px;border:1px solid #eee;";
+                div.innerHTML = `<strong style="color:#c15036;">${comment.name}</strong><br><span>${comment.text}</span>`;
+                list.appendChild(div);
+            });
+        }
+
+        // جلب التعليقات من فايربيز
+        commentsRef.on('value', snapshot => {
+            renderComments(snapshot.val());
+        });
+
+        // إضافة تعليق جديد إلى فايربيز
+        document.getElementById('comment-form').addEventListener('submit', function(e){
+            e.preventDefault();
+            const name = document.getElementById('comment-name').value.trim();
+            const text = document.getElementById('comment-text').value.trim();
+            if (!name || !text) return;
+            const newComment = {
+                name,
+                text,
+                timestamp: Date.now()
+            };
+            commentsRef.push(newComment);
+            this.reset();
+        });
+    </script>
 </body>
 </html>

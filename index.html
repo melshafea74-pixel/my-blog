@@ -3,14 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اسم مدونتك | الصفحة الرئيسية</title>
+    <title>مدونتي | الصفحة الرئيسية</title>
     <meta name="description" content="وصف قصير لمدونتك هنا">
+    <link rel="preload" as="image" href="image/1.webp">
+    <title>مدونتي | الصفحة الرئيسية</title>
+    <meta name="description" content="...">
     
+    <link rel="preload" as="image" href="image/1.webp">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/cairo/v28/SLXgc1nY6HkvangtZmpQdkh-gg.woff2" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+   
 
     <style>
+        .hero-title-container {
+    min-height: 120px; /* هذا الرقم يحجز مساحة ثابتة للعنوان */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
        html {
     scroll-behavior: smooth;
 }
@@ -344,7 +358,9 @@
     <main>
         <section class="hero">
             <div class="hero-content">
+                <div class="hero-title-container">
                 <h1>رحلتي في تعلم أساسيات تحسين محركات البحث SEO </h1>
+                </div>
                 <p>هذه رحلتي في تعلم SEO، وربما تخطئ أو تصيب. وجود ملاحظاتك أو إضافاتك على ما أكتب يساعدني على التعلم أكثر ويثري محتوى المدونة</p>
                 <a href="#blog-section" class="cta-button">المقالات</a>
             </div>
@@ -355,17 +371,17 @@
                 <h2 class="section-title">لماذا تتابع مدونتي؟</h2>
                 <div class="features-grid">
                     <div class="feature-item">
-                        <img src="https://webwiner.com/wp-content/uploads/2021/04/teamwork.png" alt="أيقونة خبرة">
-                        <h3>إذا كن خبير</h3>
+                        <img src="https://webwiner.com/wp-content/uploads/2021/04/teamwork.png" alt="أيقونة خبرة" width="64" height="64">
+                        <h3>إذا كنت خبير</h3>
                         <p>لديك فرصة لتشارك رأيك وتصحيح المعلومات وإثراء النقاش.</p>
                     </div>
                     <div class="feature-item">
-                        <img src="https://webwiner.com/wp-content/uploads/2021/04/appointment.png" alt="أيقونة مقالات">
+                        <img src="https://webwiner.com/wp-content/uploads/2021/04/appointment.png" alt="أيقونة مقالات"width="64" height="64">
                         <h3>إذا كنت مبتدئاً </h3>
                         <p>ستجد مايختصر عليك الوقت لأنك سترى الأخطاء قبلك.</p>
                     </div>
                     <div class="feature-item">
-                        <img src="https://webwiner.com/wp-content/uploads/2021/04/clients.png" alt="أيقونة دعم فني">
+                        <img src="https://webwiner.com/wp-content/uploads/2021/04/clients.png" alt="أيقونة دعم فني"width="64" height="64">
                         <h3>إذا كنت مجرد مهتم </h3>
                         <p>ستتابع تجربة انسانية ممتعة في التعلم.</p>
                     </div>
@@ -378,21 +394,21 @@
                 <h2 class="section-title">آخر المقالات في المدونة </h2>
                 <div class="posts-grid">
                     <div class="post-card">
-                        <a href="my-first-article.html"><img src="image/4.webp" alt="Seo Audit" loading="lazy" ></a>
+                        <a href="my-first-article.html"><img src="image/4.webp" alt="Seo Audit" loading="lazy" width="400" height="250"></a>
                         <div class="post-content">
                             <p class="post-date">20 أغسطس, 2025</p>
                             <h3><a href="#">بداية رحلتي في تعلم تحسين محركات البحث SEO</a></h3>
                         </div>
                     </div>
                     <div class="post-card">
-                        <a href="#"><img src="https://via.placeholder.com/400x250.png?text=صورة+المقال" alt="صورة المقال الثاني" loading="lazy"></a>
+                        <a href="#"><img src="https://via.placeholder.com/400x250.png?text=صورة+المقال" alt="صورة المقال الثاني" loading="lazy"width="400" height="250"></a>
                         <div class="post-content">
                             <p class="post-date">19 أغسطس, 2025</p>
                             <h3><a href="#">هنا تضع عنوان مقالك الثاني</a></h3>
                         </div>
                     </div>
                     <div class="post-card">
-                       <a href="#"><img src="https://via.placeholder.com/400x250.png?text=صورة+المقال" alt="صورة المقال الثالث" loading="lazy" ></a>
+                       <a href="#"><img src="https://via.placeholder.com/400x250.png?text=صورة+المقال" alt="صورة المقال الثالث" loading="lazy" width="400" height="250" ></a>
                         <div class="post-content">
                             <p class="post-date">18 أغسطس, 2025</p>
                             <h3><a href="#">وهنا تضع عنوان مقالك الثالث</a></h3>
@@ -415,60 +431,60 @@
     </footer>
 
     <script>
-        // --- سكريبت الخلفية المتحركة ---
-        document.addEventListener('DOMContentLoaded', function() {
-            const heroSection = document.querySelector('.hero');
-            if (heroSection) {
-                const images = ['image/1.webp', 'image/2.webp', 'image/3.webp'];
-                let currentIndex = 0;
+document.addEventListener('DOMContentLoaded', function() {
+    // --- سكريبت الخلفية المتحركة المحسّن ---
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+        const images = ['image/1.webp', 'image/2.webp', 'image/3.webp'];
+        let currentIndex = 0;
 
-                // إنشاء عناصر الخلفية
-                images.forEach((img, index) => {
-                    const slide = document.createElement('div');
-                    slide.className = 'hero-background';
-                    if (index === 0) {
-                        slide.classList.add('active');
-                    }
-                    slide.style.backgroundImage = `url('${img}')`;
-                    heroSection.prepend(slide);
-                });
-
-                setInterval(() => {
-                    const slides = document.querySelectorAll('.hero-background');
-                    const currentSlide = slides[slides.length - 1 - currentIndex];
-                    
-                    currentIndex = (currentIndex + 1) % images.length;
-                    const nextSlide = slides[slides.length - 1 - currentIndex];
-
-                    if (currentSlide) currentSlide.classList.remove('active');
-                    if (nextSlide) nextSlide.classList.add('active');
-
-                }, 5000); // تغيير الصورة كل 5 ثوانٍ
+        // إنشاء عناصر الخلفية
+        images.forEach((img, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'hero-background';
+            if (index === 0) {
+                slide.classList.add('active');
             }
-
-            // --- سكريبت قائمة الهامبرجر ---
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            const mobileNav = document.getElementById('mobile-nav');
-            const closeBtn = document.getElementById('close-btn');
-            const overlay = document.getElementById('overlay');
-
-            function openNav() {
-                if (mobileNav) mobileNav.classList.add('active');
-                if (overlay) overlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // منع التمرير في الصفحة
-            }
-
-            function closeNav() {
-                if (mobileNav) mobileNav.classList.remove('active');
-                if (overlay) overlay.classList.remove('active');
-                document.body.style.overflow = ''; // السماح بالتمرير مجدداً
-            }
-
-            if (hamburgerBtn) hamburgerBtn.addEventListener('click', openNav);
-            if (closeBtn) closeBtn.addEventListener('click', closeNav);
-            if (overlay) overlay.addEventListener('click', closeNav);
+            slide.style.backgroundImage = `url('${img}')`;
+            heroSection.prepend(slide);
         });
-    </script>
+
+        setInterval(() => {
+            const slides = document.querySelectorAll('.hero-background');
+            const currentSlide = slides[slides.length - 1 - currentIndex];
+
+            currentIndex = (currentIndex + 1) % images.length;
+            const nextSlide = slides[slides.length - 1 - currentIndex];
+
+            if (currentSlide) currentSlide.classList.remove('active');
+            if (nextSlide) nextSlide.classList.add('active');
+
+        }, 5000); // تغيير الصورة كل 5 ثوانٍ
+    }
+
+    // --- سكريبت قائمة الهامبرجر ---
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    const closeBtn = document.getElementById('close-btn');
+    const overlay = document.getElementById('overlay');
+
+    function openNav() {
+        if (mobileNav) mobileNav.classList.add('active');
+        if (overlay) overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+        if (mobileNav) mobileNav.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (hamburgerBtn) hamburgerBtn.addEventListener('click', openNav);
+    if (closeBtn) closeBtn.addEventListener('click', closeNav);
+    if (overlay) overlay.addEventListener('click', closeNav);
+});
+</script>
 
 </body>
 </html>
