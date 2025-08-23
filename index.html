@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدونتي | الصفحة الرئيسية</title>
+    <meta name="description" content="وصف قصير لمدونتك هنا">
+    <link rel="preload" as="image" href="image/1.webp">
+    <title>مدونتي | الصفحة الرئيسية</title>
+    <meta name="description" content="...">
+    
+    <link rel="preload" as="image" href="image/1.webp">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/cairo/v28/SLXgc1nY6HkvangtZmpQdkh-gg.woff2" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   
+
+    <style>
+        .hero-title-container {
+    min-height: 120px; /* هذا الرقم يحجز مساحة ثابتة للعنوان */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+       html {
+    scroll-behavior: smooth;
+}
+       
+       /* --- إعدادات أساسية --- */
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: right;
+            transition: margin-left 0.3s ease-in-out;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        h1, h2, h3 {
+            font-weight: 900;
+        }
+        p {
+            line-height: 1.7;
+        }
+        a {
+            text-decoration: none;
+            color: #c15036;
+        }
+        section {
+            padding: 60px 0;
+        }
+        
+        /* --- الهيدر (الجزء العلوي) --- */
+        header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #333;
+        }
+        .desktop-nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .desktop-nav li {
+            margin-right: 25px;
+        }
+        .desktop-nav li a {
+            color: #555;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        .desktop-nav li a:hover {
+            color: #c15036;
+        }
+
+        /* --- زر الهامبرجر (يظهر في الجوال فقط) --- */
+        .hamburger-btn {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        .hamburger-btn .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: #333;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        /* --- القائمة الجانبية (للموبايل) --- */
+        .mobile-nav {
+            height: 100%;
+            width: 280px;
+            position: fixed;
+            z-index: 1001;
+            top: 0;
+            left: -280px; /* مخفية خارج الشاشة جهة اليسار */
+            background-color: #111;
+            overflow-x: hidden;
+            transition: left 0.3s ease-in-out;
+            padding-top: 60px;
+        }
+        .mobile-nav.active {
+            left: 0; /* تظهر عند إضافة كلاس active */
+        }
+        .mobile-nav a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 22px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+        .mobile-nav a:hover {
+            color: #f1f1f1;
+        }
+        .mobile-nav .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 36px;
+            color: #fff;
+        }
+
+        /* --- طبقة التعتيم (Overlay) --- */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.655);
+            z-index: 999;
+        }
+        .overlay.active {
+            display: block;
+        }
+
+
+        /* --- القسم الرئيسي (Hero Section) --- */
+        .hero {
+            position: relative;
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+            padding: 100px 20px;
+            overflow: hidden; 
+        }
+        .hero::before {
+             content: '';
+             position: absolute;
+             top: 0;
+             left: 0;
+             right: 0;
+             bottom: 0;
+             background-color: rgba(0, 0, 0, 0.7);
+             z-index: 2;
+        }
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: 1;
+        }
+        .hero-background.active {
+            opacity: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+        .cta-button {
+            background-color: #c15036;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #a0412b;
+        }
+
+        /* --- قسم الميزات --- */
+        .features {
+            background-color: #fff;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+        }
+        .feature-item img {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 20px;
+        }
+
+        /* --- قسم آخر المقالات --- */
+        .blog-section {
+            background-color: #f9f9f9;
+        }
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .post-card {
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .post-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .post-content {
+            padding: 20px;
+        }
+        .post-date {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .post-card h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .post-card h3 a {
+            color: #333;
+        }
+
+        /* --- قسم التذييل (Footer) --- */
+        footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer-nav a {
+            color: #aaa;
+            margin: 0 10px;
+        }
+        .footer-nav a:hover {
+            color: #fff;
+        }
+        .copyright {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        /* --- التجاوب مع الشاشات الصغيرة (Mobile Responsive) --- */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none; /* إخفاء القائمة العادية */
+            }
+            .hamburger-btn {
+                display: block; /* إظهار زر الهامبرجر */
+            }
+            .features-grid, .posts-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-container {
+                flex-direction: row;
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5Q8WHT348"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y5Q8WHT348');
+</script>
+</head>
+<body>
+    <div id="overlay" class="overlay"></div>
+
+    <nav id="mobile-nav" class="mobile-nav">
+        <a href="javascript:void(0)" id="close-btn" class="close-btn">&times;</a>
+        <a href="#">الرئيسية</a>
+        <a href="#">المدونة</a>
+        <a href="#">ابدأ هنا</a>
+        <a href="#">اتصل بنا</a>
+    </nav>
+    
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">مدونتي</a>
+            <ul class="desktop-nav">
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">المدونة</a></li>
+                <li><a href="#">ابدأ هنا</a></li>
+                <li><a href="#">اتصل بنا</a></li>
+            </ul>
+            <button id="hamburger-btn" class="hamburger-btn">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-title-container">
+                <h1>رحلتي في تعلم أساسيات تحسين محركات البحث SEO </h1>
+                </div>
+                <p>هذه رحلتي في تعلم SEO، وربما تخطئ أو تصيب. وجود ملاحظاتك أو إضافاتك على ما أكتب يساعدني على التعلم أكثر ويثري محتوى المدونة</p>
+                <a href="#blog-section" class="cta-button">المقالات</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">لماذا تتابع مدونتي؟</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <img src="https://webwiner.com/wp-content/uploads/2021/04/teamwork.png" alt="أيقونة خبرة" width="64" height="64">
+                        <h3>إذا كنت خبير</h3>
+                        <p>لديك فرصة لتشارك رأيك وتصحيح المعلومات وإثراء النقاش.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="https://webwiner.com/wp-content/uploads/2021/04/appointment.png" alt="أيقونة مقالات"width="64" height="64">
+                        <h3>إذا كنت مبتدئاً </h3>
+                        <p>ستجد مايختصر عليك الوقت لأنك سترى الأخطاء قبلك.</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="https://webwiner.com/wp-content/uploads/2021/04/clients.png" alt="أيقونة دعم فني"width="64" height="64">
+                        <h3>إذا كنت مجرد مهتم </h3>
+                        <p>ستتابع تجربة انسانية ممتعة في التعلم.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog-section" class  ="blog-section">
+            <div class="container">
+                <h2 class="section-title">آخر المقالات في المدونة </h2>
+                <div class="posts-grid">
+                    <div class="post-card">
+                        <a href="my-first-article.html"><img src="image/4.webp" alt="Seo Audit" loading="lazy" width="400" height="250"></a>
+                        <div class="post-content">
+                            <p class="post-date">20 أغسطس, 2025</p>
+                            <h3><a href="#">بداية رحلتي في تعلم تحسين محركات البحث SEO</a></h3>
+                        </div>
+                    </div>
+                    <div class="post-card">
+                        <a href="#"><img src="https://via.placeholder.com/400x250.png?text=صورة+المقال" alt="صورة المقال الثاني" loading="lazy"width="400" height="250"></a>
+                        <div class="post-content">
+                            <p class="post-date">19 أغسطس, 2025</p>
+                            <h3><a href="#">هنا تضع عنوان مقالك الثاني</a></h3>
+                        </div>
+                    </div>
+                    <div class="post-card">
+                       <a href="#"><img src="https://via.placeholder.com/400x250.png?text=صورة+المقال" alt="صورة المقال الثالث" loading="lazy" width="400" height="250" ></a>
+                        <div class="post-content">
+                            <p class="post-date">18 أغسطس, 2025</p>
+                            <h3><a href="#">وهنا تضع عنوان مقالك الثالث</a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-nav">
+                <a href="#">سياسة الخصوصية</a>
+                <a href="#">شروط الاستخدام</a>
+                <a href="#">اتصل بنا</a>
+            </div>
+            <p class="copyright">جميع الحقوق محفوظة &copy; اسم مدونتك 2025</p>
+        </div>
+    </footer>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // --- سكريبت الخلفية المتحركة المحسّن ---
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+        const images = ['image/1.webp', 'image/2.webp', 'image/3.webp'];
+        let currentIndex = 0;
+
+        // إنشاء عناصر الخلفية
+        images.forEach((img, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'hero-background';
+            if (index === 0) {
+                slide.classList.add('active');
+            }
+            slide.style.backgroundImage = `url('${img}')`;
+            heroSection.prepend(slide);
+        });
+
+        setInterval(() => {
+            const slides = document.querySelectorAll('.hero-background');
+            const currentSlide = slides[slides.length - 1 - currentIndex];
+
+            currentIndex = (currentIndex + 1) % images.length;
+            const nextSlide = slides[slides.length - 1 - currentIndex];
+
+            if (currentSlide) currentSlide.classList.remove('active');
+            if (nextSlide) nextSlide.classList.add('active');
+
+        }, 5000); // تغيير الصورة كل 5 ثوانٍ
+    }
+
+    // --- سكريبت قائمة الهامبرجر ---
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    const closeBtn = document.getElementById('close-btn');
+    const overlay = document.getElementById('overlay');
+
+    function openNav() {
+        if (mobileNav) mobileNav.classList.add('active');
+        if (overlay) overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+        if (mobileNav) mobileNav.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (hamburgerBtn) hamburgerBtn.addEventListener('click', openNav);
+    if (closeBtn) closeBtn.addEventListener('click', closeNav);
+    if (overlay) overlay.addEventListener('click', closeNav);
+});
+</script>
+
+</body>
+</html>
